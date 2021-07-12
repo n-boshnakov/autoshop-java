@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4 th:if="${clients.size()>0}" th:text="'Schools: ' + ${clients.size()}"> </h4>
+<div class=" col-6">
+    <h3 th:unless="${clients} and ${clients.size()}">There are no clients!</h3>
+    <table th:if="${clients.size()>0}" class="table table-hover">
+        <th>Id</th>
+        <th>Name</th>
+        <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+        <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
+        <tr th:each="client : ${clients}">
+            <td th:text="${client.id}"></td>
+            <td th:text="${client.name}"></td>
+            <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-info" th:href="@{'/clients/edit-client/'+${client.id}}">Edit</a></td>
+
+            <td sec:authorize="hasAuthority('ADMIN')">
+                <a class="btn btn-danger" th:href="@{'/clients/delete/'+${client.id}}">Delete</a></td>
+
+        </tr>
+    </table>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4 th:if="${cars.size()>0}" th:text="'Cars: ' + ${cars.size()}"> </h4>
+<div class=" col-6">
+    <h3 th:unless="${cars} and ${cars.size()}">There are no cars!</h3>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

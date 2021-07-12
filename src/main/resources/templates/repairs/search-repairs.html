@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Find Repairs by Brand</h4>
+<div class="col-6">
+    <form action="#" th:action="@{/repairs/repairs-search-brand}" method="get">
+        <div class="form-group">
+            <label for="brand">Brand</label>
+            <select class="form-control" th:field="${car.brand}" id="brand">
+                <option value="">Select Brand</option>
+                <option th:each="brand : ${brands}" th:value="${brand.id}"
+                        th:text="${brand.brand}+ ' -> ' + ${brand.id}"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Find Repairs</button>
+    </form>
+    <form action="#" th:action="@{/repairs/repairs-search-year}" method="get">
+        <div class="form-group">
+            <label for="year">Year</label>
+            <input class="form-control" type="text" th:field="*{car.year}" placeholder="Year" id="year">
+            <span class="text-danger" th:if="${#fields.hasErrors('car.year')}" th:errors="*{car.year}">Year Error</span>
+        </div>
+        <button type="submit" class="btn btn-primary">Find Repairs</button>
+    </form>
+<!--    <form action="#" th:action="@{/repairs/repairs-search-service}" method="get">-->
+<!--        <div class="form-group">-->
+<!--            <label for="service">Service</label>-->
+<!--            <select class="form-control" th:field="${qualifications}" id="service">-->
+<!--                <option value="">Select Service</option>-->
+<!--                <option th:each="service : ${qualifications}" th:value="${service}" th:text="${service}"></option>-->
+<!--            </select>-->
+<!--        </div>-->
+<!--        <button type="submit" class="btn btn-primary">Find Repairs</button>-->
+<!--    </form>-->
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4 th:if="${autoshops.size()>0}" th:text="'Autoshops: ' + ${autoshops.size()}"> </h4>
+<div class=" col-6">
+    <h3 th:unless="${autoshops} and ${autoshops.size()}">There are no autoshops!</h3>
+    <table th:if="${autoshops.size()>0}" class="table table-hover">
+        <th>Autoshop Name</th>
+        <th>Owner</th>
+        <th>Works With</th>
+        <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+        <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
+        <tr th:each="autoshop : ${autoshops}">
+            <td th:text="${autoshop.name}"></td>
+            <td th:text="${autoshop.ownerName}"></td>
+            <td th:text="${autoshop.getBrand().brand}"></td>
+            <td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-info" th:href="@{'/autoshops/edit-autoshop/'+${autoshop.id}}">Edit</a></td>
+
+            <td sec:authorize="hasAuthority('ADMIN')">
+                <a class="btn btn-danger" th:href="@{'/autoshops/delete/'+${autoshop.id}}">Delete</a></td>
+
+        </tr>
+    </table>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

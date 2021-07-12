@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Register a repair</h4>
+<div class="col-6">
+    <form action="#" th:action="@{/repairs/update/{id}(id=${id})}" th:object="${repair}" method="post">
+        <div class="form-group">
+            <div class="form-group">
+                <label for="repairDate">Date</label>
+                <input class="form-control" type="date" th:field="*{repairDate}" id="repairDate">
+                <span class="text-danger" th:if="${#fields.hasErrors('repairDate')}"
+                      th:errors="*{repairDate}"> Date Error</span>
+            </div>
+            <div class="form-group">
+                <label for="autoshop">Autoshop</label>
+                <select class="form-control" th:field="${repair.autoshop}" id="autoshop">
+                    <option value="">Select Autoshop</option>
+                    <option th:each="autoshop : ${autoshops}" th:value="${autoshop.id}"
+                            th:text="${autoshop.name}+ ' -> ' + ${autoshop.getBrand().getBrand()}"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="car">Car</label>
+                <select class="form-control" th:field="${repair.car}" id="car">
+                    <option value="">Select Car</option>
+                    <option th:each="car : ${cars}" th:value="${car.id}"
+                            th:text="${car.plate}+ ' , ' + ${car.brand.getBrand()}+ ' , ' + ${car.model} "></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="service">Service</label>
+                <select class="form-control" th:field="${repair.service}" id="service">
+                    <option value="">Select Service</option>
+                    <option th:each="service : ${qualifications}" th:value="${service}" th:text="${service} + ' - ' + ${service.price} + 'BGN'"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Repair</button>
+        </div>
+    </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>

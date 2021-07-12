@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:fragment="head">
+    <title>Mechanic Autos</title>
+    <meta charset="UTF-8">
+    <link href="/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+</head>
+<header th:fragment="header">
+    <div class="row">
+        <div class="col-9">
+            <h1>Mechanic Autos</h1>
+        </div>
+
+        <div class="col-3" sec:authorize="isAuthenticated()">
+            Hello,
+            <span sec:authentication="name"></span>
+            <a class="btn" th:href="@{/logout}">Logout</a>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navigation">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <td sec:authorize="hasAuthority('ADMIN')">
+                        <a class="nav-link" href="/clients">Clients</a></td>
+                </li>
+                <li class="nav-item">
+                    <td sec:authorize="hasAuthority('ADMIN')">
+                        <a class="nav-link" href="/clients/create-client">Create Client</a></td>
+                </li>
+                <li class="nav-item">
+                    <td sec:authorize="hasAuthority('ADMIN')">
+                        <a class="nav-link" href="/workers">List of Workers</a></td>
+                </li>
+                <li class="nav-item">
+                    <td sec:authorize="hasAuthority('ADMIN')">
+                        <a class="nav-link" href="/workers/create-worker">Create Worker</a></td>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/autoshops">Autoshops</a>
+                </li>
+                <li class="nav-item">
+                    <td sec:authorize="hasAuthority('ADMIN')">
+                        <a class="nav-link" href="/autoshops/create-autoshop">Create Autoshop</a></td>
+                </li>
+                <li class="nav-item">
+                    <td sec:authorize="hasAuthority('ADMIN')">
+                        <a class="nav-link" href="/repairs">Repairs</a></td>
+                </li>
+                <li class="nav-item">
+                    <td sec:authorize="hasAuthority('CLIENT')">
+                        <a class="nav-link" href="/repairs/repairs-client">Repairs</a></td>
+                </li>
+                <li class="nav-item">
+                    <td sec:authorize="hasAuthority('CLIENT')">
+                        <a class="nav-link" href="/repairs/create-repair">Create Repair</a></td>
+                </li>
+                <li class="nav-item">
+                    <td sec:authorize="hasAuthority('CLIENT')">
+                        <a class="nav-link" href="/cars">Cars</a></td>
+                </li>
+                <li class="nav-item">
+                    <td sec:authorize="hasAuthority('WORKER')">
+                        <a class="nav-link" href="/cars/cars-autoshop">Cars Serviced in Autoshop</a></td>
+                </li>
+                <li class="nav-item">
+                    <td sec:authorize="hasAuthority('WORKER')">
+                        <a class="nav-link" href="/cars/search-cars">Search Cars</a></td>
+                </li>
+                <li class="nav-item">
+                    <td sec:authorize="hasAuthority('WORKER')">
+                        <a class="nav-link" href="/repairs/search-repairs">Search Repairs</a></td>
+                </li>
+                <li class="nav-item">
+                    <td sec:authorize="hasAuthority('CLIENT')">
+                        <a class="nav-link" href="/cars/create-car">Create Car</a></td>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<footer page-footer font-small>
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="#"> Mechanic Autos</a>
+    </div>
+</footer>
+
+</html>
+

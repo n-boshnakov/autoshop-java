@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: head"></head>
+<body>
+<header th:replace="fragments :: header"></header>
+<h4>Register a Car</h4>
+<div class="col-6">
+    <form action="#" th:action="@{/cars/create}" th:object="${car}" method="post">
+        <div class="form-group">
+            <div class="form-group">
+                <label for="plate">Username</label>
+                <input class="form-control" type="text" th:field="*{plate}" placeholder="Plate" id="plate">
+                <span class="text-danger" th:if="${#fields.hasErrors('plate')}" th:errors="*{plate}">Plate Error</span>
+            </div>
+            <div class="form-group">
+                <label for="model">Model</label>
+                <input class="form-control" type="text" th:field="*{model}" placeholder="Model" id="model">
+                <span class="text-danger" th:if="${#fields.hasErrors('model')}" th:errors="*{model}">Model Error</span>
+            </div>
+            <div class="form-group">
+                <label for="year">Year</label>
+                <input class="form-control" type="text" th:field="*{year}" placeholder="Year" id="year">
+                <span class="text-danger" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Year Error</span>
+            </div>
+            <div class="form-group">
+                <label for="brand">Works With Brand</label>
+                <select class="form-control" th:field="${car.brand}" id="brand">
+                    <option value="">Select Brand</option>
+                    <option th:each="brand : ${brands}" th:value="${brand.id}"
+                            th:text="${brand.brand}+ ' -> ' + ${brand.id}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Car</button>
+        </div>
+    </form>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>
